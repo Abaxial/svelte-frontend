@@ -1,9 +1,10 @@
 <script>
   let message = "";
+  const apiUrl = process.env.VITE_API_URL;
 
   const fetchMessage = async () => {
     try {
-      const res = await fetch("http://localhost:3000/welcome", {
+      const res = await fetch(`${apiUrl}/welcome`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -30,4 +31,3 @@
   <h1>{message}</h1>
   <Weather />
 </main>
-
