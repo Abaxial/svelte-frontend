@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { createHtmlPlugin } from '@vitejs/plugin-html';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -15,6 +16,14 @@ export default defineConfig({
         dev: mode === 'development',
       },
     }),
+    createHtmlPlugin({
+      inject: {
+        data: {
+          title: 'Svelte App',
+          VITE_API_URL: process.env.VITE_API_URL,
+        },
+      },
+    }),
     {
       name: 'html-transform',
       transformIndexHtml(html) {
@@ -28,11 +37,13 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist',
+    outDir: 'dist', // Ensure this is your intended build output directory
     sourcemap: true,
     minify: 'terser',
     rollupOptions: {
-      input: 'src/main.ts',
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+      },
       output: {
         entryFileNames: '[name].js',
         format: 'iife',
@@ -41,7 +52,7 @@ export default defineConfig({
       }
     }
   },
-  publicDir: 'public',
+  publicDir: 'public', // Ensure this is the directory for your static assets
   server: {
     open: true,
     port: 8080,
