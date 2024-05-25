@@ -36,12 +36,13 @@ export default defineConfig({
       output: {
         entryFileNames: '[name].js',
         format: 'iife',
-        name: 'app'
+        name: 'app',
+        file: 'public/build/bundle.js'
       }
     }
   },
   server: {
     open: true,
-    port: 3000,
+    port: 8080,
   },
 });
