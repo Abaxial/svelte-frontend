@@ -37,7 +37,7 @@ export default defineConfig({
         entryFileNames: '[name].js',
         format: 'iife',
         name: 'app',
-        file: 'public/build/bundle.js'
+        dir: 'public/build/'
       }
     }
   },
