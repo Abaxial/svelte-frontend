@@ -28,11 +28,11 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist', // Ensure this is your intended build output directory
+    outDir: 'dist',
     sourcemap: true,
     minify: 'terser',
     rollupOptions: {
-      input: 'index.html',
+      input: 'src/main.ts',
       output: {
         entryFileNames: '[name].js',
         format: 'iife',
@@ -41,10 +41,8 @@ export default defineConfig({
       }
     }
   },
-  publicDir: 'public', // Ensure this is the directory for your static assets
   server: {
     open: true,
     port: 8080,
   },
 });
-// Something New
