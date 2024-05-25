@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import dotenv from 'dotenv';
 import path from 'path';
+import { terser } from 'rollup-plugin-terser';
 
 // Determine the environment and load the appropriate .env file
 const mode = process.env.NODE_ENV || 'development';
@@ -18,9 +19,10 @@ export default defineConfig({
     {
       name: 'html-transform',
       transformIndexHtml(html) {
-        return html.replace(/process.env.VITE_API_URL/g, process.env.VITE_API_URL);
+        return html.replace(/process.env.VITE_API_URL/g, JSON.stringify(process.env.VITE_API_URL));
       }
-    }
+    },
+    terser(),
   ],
   define: {
     'process.env': {
