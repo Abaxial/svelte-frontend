@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { createHtmlPlugin } from '@vitejs/plugin-html';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -14,14 +13,6 @@ export default defineConfig({
     svelte({
       compilerOptions: {
         dev: mode === 'development',
-      },
-    }),
-    createHtmlPlugin({
-      inject: {
-        data: {
-          title: 'Svelte App',
-          VITE_API_URL: process.env.VITE_API_URL,
-        },
       },
     }),
     {
@@ -41,9 +32,7 @@ export default defineConfig({
     sourcemap: true,
     minify: 'terser',
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-      },
+      input: 'index.html',
       output: {
         entryFileNames: '[name].js',
         format: 'iife',
