@@ -1,15 +1,18 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import dotenv from 'dotenv';
+import path from 'path';
 
-// Load environment variables
-dotenv.config();
+// Determine the environment and load the appropriate .env file
+const mode = process.env.NODE_ENV || 'development';
+const envFile = mode === 'production' ? '.env.production' : '.env';
+dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 export default defineConfig({
   plugins: [
     svelte({
       compilerOptions: {
-        dev: !process.env.NODE_ENV || process.env.NODE_ENV === 'development',
+        dev: mode === 'development',
       },
     }),
     {
@@ -38,7 +41,7 @@ export default defineConfig({
     }
   },
   server: {
-    open: true,  // Automatically open the app in the browser
-    port: 3000,  // Specify the port
+    open: true,
+    port: 3000,
   },
 });
