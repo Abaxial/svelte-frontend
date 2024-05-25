@@ -30,11 +30,12 @@ export default defineConfig({
     rollupOptions: {
       input: 'src/main.ts',
       output: {
+        dir: 'public/build',
+        entryFileNames: 'bundle.js',
         format: 'iife',
-        name: 'app',
-        file: 'public/build/bundle.js',
-      },
-    },
+        name: 'app'
+      }
+    }
   },
   server: {
     open: true,  // Automatically open the app in the browser
