@@ -1,6 +1,9 @@
-<script>
-  let message = "";
-  const apiUrl = process.env.VITE_API_URL;
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import Weather from './Weather.svelte';
+
+  let message: string = "";
+  const apiUrl: string = import.meta.env.VITE_API_URL as string;
 
   const fetchMessage = async () => {
     try {
@@ -23,8 +26,9 @@
     }
   };
 
-  fetchMessage();
-  import Weather from './Weather.svelte';
+  onMount(() => {
+    fetchMessage();
+  });
 </script>
 
 <main>

@@ -1,15 +1,20 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
 
   // Import the API URL environment variable
-  const apiUrl = process.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL as string;
 
-  let torontoWeather = null;
-  let burlingtonWeather = null;
-  let wiartonWeather = null;
-  let error = null;
+  interface WeatherData {
+    temperature: number;
+    description: string;
+  }
 
-  const fetchWeather = async (cityId, cityName) => {
+  let torontoWeather: WeatherData | null = null;
+  let burlingtonWeather: WeatherData | null = null;
+  let wiartonWeather: WeatherData | null = null;
+  let error: string | null = null;
+
+  const fetchWeather = async (cityId: number, cityName: string): Promise<WeatherData> => {
     const res = await fetch(`${apiUrl}/weather?city_id=${cityId}&city_name=${cityName}`, {
       method: 'GET',
       headers: {
@@ -32,7 +37,7 @@
       torontoWeather = toronto;
       burlingtonWeather = burlington;
       wiartonWeather = wiarton;
-    } catch (err) {
+    } catch (err: any) {
       error = err.message;
     }
   });
