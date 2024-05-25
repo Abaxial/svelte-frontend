@@ -25,13 +25,13 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: 'dist',
     sourcemap: true,
     minify: 'terser',
     rollupOptions: {
       input: 'src/main.ts',
       output: {
-        dir: 'public/build',
-        entryFileNames: 'bundle.js',
+        entryFileNames: '[name].js',
         format: 'iife',
         name: 'app'
       }
