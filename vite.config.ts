@@ -37,10 +37,11 @@ export default defineConfig({
         entryFileNames: '[name].js',
         format: 'iife',
         name: 'app',
-        dir: 'public/build/'
+        dir: 'dist'
       }
     }
   },
+  publicDir: 'public',
   server: {
     open: true,
     port: 8080,
